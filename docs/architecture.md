@@ -23,6 +23,7 @@ This framework is built around a simple model:
 > **Code defines transformations**
 > **Workflows define execution**
 > **Results define outputs**
+> **Exploratory is exploratory so not tracked by github and should be temporary**
 
 Everything in the repository maps cleanly to one of these roles.
 
@@ -92,6 +93,8 @@ logs/          → execution logs and runtime traces
 tests/         → validation and correctness checks
 docs/          → documentation and design notes
 assets/        → static resources (schemas, templates, configs)
+
+exploratory/   → temporary workspace not tracked
 ```
 
 ---
