@@ -27,8 +27,8 @@ jobs:
 
       - name: Black
         shell: bash -el {0}
-        run: black --check .
+        run: black --check .  --exclude exploratory
 
       - name: Ruff
         shell: bash -el {0}
-        run: ruff check .
+        run: ruff check .  --exclude exploratory
