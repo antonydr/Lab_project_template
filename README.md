@@ -137,6 +137,68 @@ snakemake --configfile config/config.yaml
 
 ---
 
+## Staging files
+
+This repository includes a controlled file staging script for large scientific projects.
+
+It provides safe, reproducible staging of files before committing, with size limits, gitignore awareness, and optional preview mode.
+
+**Important to note:** you should still know what you are trying to add to github so this should be used responsibly where appropriate
+
+### Script location
+
+```bash
+scripts/git/stage_files.sh
+```
+
+### Setup (first time only)
+
+Ensure the script is executable:
+```bash
+chmod +x scripts/git/stage_files.sh
+```
+
+### Usage
+
+**Full repository staging (default)**
+```bash
+bash scripts/git/stage_files.sh
+```
+
+**Dry run (preview only)**
+No files are staged; output is shown.
+```bash
+bash scripts/git/stage_files.sh --dry-run
+```
+
+**Specific directory**
+You can restrict staging to a subdirectory using `DIR`
+```bash
+DIR=src bash scripts/git/stage_files.sh
+```
+```bash
+DIR=notebooks bash scripts/git/stage_files.sh
+```
+```bash
+DIR=scripts bash scripts/git/stage_files.sh
+```
+
+**Dry run for a specific directory**
+```bash
+DIR=src bash scripts/git/stage_files.sh --dry-run
+```
+
+**What this script does**
+- Scans files inside the selected directory (`DIR`)
+- Respects `.gitignore`
+- Skips files larger than configured threshold (`config/git.yaml`)
+- Stages valid files using `git add`
+- Safely stages deletions using `git add -u`
+- Writes skipped-file logs locally in `logs/git/`
+
+
+---
+
 ## Citation
 
 If you use this repository, please cite:

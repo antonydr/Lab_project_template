@@ -1,0 +1,8 @@
+git_stage:
+  max_size_mb: 100
+  default_dry_run: false
+
+  logs:
+    dir: logs/git
+    skipped_files: skipped_files.txt
+    skipped_abs_paths: skipped_files_abs_paths.txt
