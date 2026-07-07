@@ -1,0 +1,126 @@
+name: 🐛 Bug Report
+description: Report a problem or unexpected behaviour for a script, notebook, workflow or pipeline
+title: "[Bug] "
+labels:
+  - bug
+
+body:
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      description: |
+        Select the severity of the bug from your perspective. This will help us prioritise the issue.
+
+        Maintainers will review and assign the final priority based on the impact of the issue and the resources available to fix it.
+      options:
+        - Low - Minor issue, cosmetic problem, or does not affect results
+        - Medium - Affects usage but a workaround exists
+        - High - Blocks analysis, workflow execution, or normal project usage
+        - Critical - Prevents project execution or affects important/reported results
+    validations:
+      required: true
+  
+  - type: textarea
+    id: short_description
+    attributes:
+      label: Short description
+      description: A clear and concise summary of what the problem is (one to two sentences). 
+    validations:
+      required: true
+
+  - type: textarea
+    id: extended_description
+    attributes:
+      label: Extended description
+      description: |
+        Provide additional context about the issue.
+
+        Include where possible:
+
+        - what you were trying to do
+        - when the issue occurs
+        - affected files, scripts, notebooks, or workflows
+        - whether this affects reproducibility or results
+
+      placeholder: |
+        Optional:
+
+        - Include screenshots or code snippets to help explain your problem.
+        - If reporting a bug in a script, notebook, workflow, or pipeline, include the relevant code snippet or file.
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: To reproduce
+      description: |
+        Provide the minimum step(s) or command(s) required to reproduce the problem.
+      placeholder: |
+        Example:
+
+        ```bash
+        # e.g. the command or notebook cell that fails
+        ```
+      render: bash
+    validations:
+      required: true
+
+
+  - type: textarea
+    id: error_output
+    attributes:
+      label: Error output
+      description: Paste the complete error message, traceback, or relevant logs.
+      render: shell
+    validations:
+      required: true
+
+
+  - type: textarea
+    id: expected_behaviour
+    attributes:
+      label: Expected behaviour
+      description: Describe what should have happened.
+    validations:
+      required: true
+
+  - type: input
+    id: operating_system
+    attributes:
+      label: Operating system
+      placeholder: |
+        Example:
+        Ubuntu 24.04, macOS 15, HPC cluster
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Computational environment
+      description: |
+        Include information about the environment used.
+
+        Examples:
+
+        - Conda environment
+        - Docker or Apptainer image
+        - YAML configuration files
+        - Python/R/language versions
+        - Relevant package versions
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: |
+        Add any other useful information.
+
+        Examples:
+        
+        - input file formats
+        - dataset details
+        - configuration values
+        - related issues
+        - attempted fixes
