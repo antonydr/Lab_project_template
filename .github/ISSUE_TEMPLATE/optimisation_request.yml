@@ -1,0 +1,183 @@
+name: 🚀 Optimisation Request
+description: Request improvements to performance, efficiency, scalability, or resource usage
+title: "[Optimisation] "
+labels:
+  - optimisation
+
+body:
+
+  - type: dropdown
+    id: optimisation_area
+    attributes:
+      label: Optimisation area
+      description: Which area would you like to improve?
+      options:
+        - Runtime performance
+        - Memory usage
+        - CPU utilisation
+        - GPU utilisation
+        - Parallelisation or concurrency
+        - Storage usage
+        - Data loading or processing
+        - Workflow execution time
+        - Scalability for larger datasets
+        - Network or external resource usage
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      description: |
+        Select the importance of this optimisation from your perspective.
+
+        Maintainers will review and assign the final priority based on impact, effort, and available resources.
+      options:
+        - Low - Minor improvement or convenience
+        - Medium - Noticeable improvement for some users or workflows
+        - High - Significant impact on common workflows
+        - Critical - Current performance prevents practical use
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Short description
+      description: |
+        Provide a brief summary of the optimisation opportunity.
+
+        Keep this to one or two sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_performance
+    attributes:
+      label: Current performance
+      description: |
+        Describe the current performance characteristics.
+
+        Include where possible:
+        - execution time
+        - memory usage
+        - CPU/GPU usage
+        - dataset size
+        - number of samples/files/jobs
+        - computational environment
+      placeholder: |
+        Example:
+
+        Processing dataset of 10 million records currently takes ~8 hours using 16 CPU cores.
+    validations:
+      required: true
+
+  - type: textarea
+    id: bottleneck
+    attributes:
+      label: Suspected bottleneck
+      description: |
+        Describe what you believe is limiting performance.
+
+        Examples:
+        - slow processing step
+        - inefficient algorithm
+        - repeated calculations
+        - excessive memory usage
+        - lack of parallelisation
+        - slow input/output operations
+
+  - type: textarea
+    id: affected_area
+    attributes:
+      label: Affected components
+      description: |
+        Identify the affected parts of the project.
+
+        Examples:
+        - scripts
+        - notebooks
+        - workflows
+        - pipelines
+        - functions/modules
+        - data processing steps
+        - computational environment
+
+  - type: textarea
+    id: proposed_improvement
+    attributes:
+      label: Proposed optimisation
+      description: |
+        Describe the improvement you would like to see.
+
+        Include where possible:
+        - suggested approach
+        - alternative algorithms or tools
+        - expected changes
+        - trade-offs or limitations
+
+  - type: textarea
+    id: expected_gain
+    attributes:
+      label: Expected improvement
+      description: |
+        Describe the expected benefit.
+
+        Examples:
+        - reduced runtime
+        - lower memory usage
+        - ability to process larger datasets
+        - reduced computational cost
+        - improved reproducibility
+
+  - type: textarea
+    id: benchmarks
+    attributes:
+      label: Benchmarking information
+      description: |
+        Provide any available measurements or comparisons.
+
+        Examples:
+        - before/after timings
+        - profiling output
+        - resource usage statistics
+        - benchmark datasets
+        - screenshots or reports
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Computational environment
+      description: |
+        Provide relevant environment details.
+
+        Examples:
+        - operating system
+        - CPU/GPU hardware
+        - cluster or cloud environment
+        - Python/R/language versions
+        - package versions
+        - container or environment files
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: |
+        Add any other useful information.
+
+        Examples:
+        - related issues
+        - profiling results
+        - publications or methods motivating the optimisation
+        - implementation ideas
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to be potentially contacted to help implement this optimisation, test, benchmark or suggest further improvements
+        - label: I don't wish to be contacted
