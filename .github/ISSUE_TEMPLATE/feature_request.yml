@@ -1,0 +1,108 @@
+name: ✨ Feature Request
+description: Suggest a new feature, enhancement, or improvement to the project
+title: "[Feature] "
+labels:
+  - enhancement
+
+body:
+
+  - type: dropdown
+    id: feature_area
+    attributes:
+      label: Feature area
+      description: Which part of the project does this request relate to?
+      options:
+        - Script or workflow functionality
+        - Notebook functionality
+        - Pipeline or analysis capability
+        - User interface or usability
+        - Developer experience
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: short_description
+    attributes:
+      label: Short description
+      description: |
+        Provide a brief summary of the feature or improvement you would like to see.
+
+        Keep this to one or two sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or motivation
+      description: |
+        Describe the problem or the motivation for this feature.
+
+        Include:
+        - what you are trying to achieve
+        - current limitations or pain points
+        - who would benefit from this improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed solution
+      description: |
+        Describe the functionality or behaviour you would like to see.
+
+        Include examples where possible:
+        - expected inputs and outputs
+        - example commands or workflows
+        - expected user experience
+
+        A full solution is not expected, but please provide as much detail as possible to help the developers understand your request.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: |
+        Describe any alternative approaches, workarounds, or existing solutions you have considered.
+
+        Explain why these do not fully address the need.
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Expected impact
+      description: How would this feature improve the project?
+      options:
+        - Small improvement for specific use cases
+        - Improves usability for many users
+        - Enables new analysis or workflows
+        - Removes a significant limitation
+        - Critical capability for project adoption
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: |
+        Add any other relevant information.
+
+        Examples:
+        - related issues or discussions
+        - example datasets
+        - publications or methods requiring this feature
+        - screenshots or diagrams
+        - implementation ideas
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to be potentially contacted to help implement, test or suggest further improvements
+        - label: I don't wish to be contacted
