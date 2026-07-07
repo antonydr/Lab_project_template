@@ -1,0 +1,101 @@
+name: 📚 Documentation Update
+description: Suggest improvements, corrections, or additions to the project documentation
+title: "[Docs] "
+labels:
+  - documentation
+
+body:
+
+  - type: dropdown
+    id: update_type
+    attributes:
+      label: Type of documentation update
+      description: What kind of documentation change are you requesting?
+      options:
+        - New / missing documentation
+        - Incorrect information
+        - Clarification or improved explanation
+        - Outdated documentation
+        - Broken link
+        - Typographical or formatting issue
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly describe the documentation issue or requested improvement.
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Documentation location
+      description: Link or path to the affected documentation.
+      
+  - type: textarea
+    id: current_content
+    attributes:
+      label: Current content
+      description: |
+        What is currently documented?
+
+        Copy the relevant section or describe what is incorrect or unclear.
+
+        If this is a new documentation request, please state "Not applicable or N/A" in this field.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed update
+      description: |
+        Describe what should be changed.
+
+        If possible, provide suggested wording or describe the additional information that should be included.
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why is this change needed?
+      description: |
+        Explain why this update would improve the documentation.
+
+        Examples to expand on for clarity:
+        - prevents confusion
+        - reflects recent changes
+        - improves onboarding
+        - corrects inaccurate information
+        - improves reproducibility
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Supporting information
+      description: |
+        Include any relevant references.
+
+        Examples:
+        - related issues or pull requests
+        - publications
+        - external documentation
+        - screenshots
+        - examples
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: |
+        Would you be willing to contribute to the documentation update?
+      options:
+        - label: I would be willing to be potentially contacted to help update the documentation, review changes or suggest further improvements
+        - label: I don't wish to be contacted
