@@ -1,0 +1,150 @@
+name: 🛠️ Maintenance Request
+description: Request improvements to code quality, infrastructure, dependencies, workflows, or project maintenance
+title: "[Maintenance] "
+labels:
+  - maintenance
+
+body:
+
+  - type: dropdown
+    id: maintenance_type
+    attributes:
+      label: Maintenance type
+      description: What type of maintenance work is being requested?
+      options:
+        - Dependency update
+        - Code refactoring
+        - Technical debt reduction
+        - Test improvements
+        - CI/CD or automation improvement
+        - Build or deployment improvement
+        - Performance improvement
+        - Security improvement
+        - Removal of deprecated code or functionality
+        - Project configuration improvement
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      description: |
+        Select the importance of this maintenance request from your perspective.
+
+        Maintainers will review and assign the final priority based on impact and available resources.
+      options:
+        - Low - Nice-to-have improvement with limited impact
+        - Medium - Improves maintainability, reliability, or developer experience
+        - High - Addresses significant technical debt, risk, or project limitations
+        - Critical - Required to maintain project operation, security, or compatibility
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Short description
+      description: |
+        Provide a concise summary of the maintenance work being requested.
+
+        Keep this to one or two sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: |
+        Explain why this maintenance is needed.
+
+        Include where possible:
+        - current limitations or problems
+        - technical debt being addressed
+        - risks of not making this change
+        - affected users, workflows, or contributors
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_area
+    attributes:
+      label: Affected components
+      description: |
+        Identify the parts of the project affected.
+
+        Examples:
+        - scripts
+        - notebooks
+        - workflows
+        - pipelines
+        - CI/CD configuration
+        - dependencies
+        - infrastructure
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed change
+      description: |
+        Describe the maintenance work you suggest.
+
+        Include:
+        - files, modules, or systems affected
+        - expected changes
+        - implementation approach if known
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_outcome
+    attributes:
+      label: Expected outcome
+      description: |
+        Describe how the project will improve after this work is completed.
+
+        Examples:
+        - easier maintenance
+        - improved reliability
+        - reduced complexity
+        - faster execution
+        - improved testing
+        - improved security
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and considerations
+      description: |
+        Include any relevant constraints or dependencies.
+
+        Examples:
+        - breaking changes
+        - required migrations
+        - compatibility considerations
+        - external dependencies
+        - related issues or pull requests
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: |
+        Add any other useful information.
+
+        Examples:
+        - references
+        - benchmarks
+        - logs
+        - screenshots
+        - design discussions
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to be potentially contacted to help implement this maintenance or suggest further improvements
+        - label: I don't wish to be contacted
