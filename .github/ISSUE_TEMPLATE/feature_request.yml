@@ -3,6 +3,7 @@ description: Suggest a new feature, enhancement, or improvement to the project
 title: "[Feature] "
 labels:
   - enhancement
+  - feature_request
 
 body:
 

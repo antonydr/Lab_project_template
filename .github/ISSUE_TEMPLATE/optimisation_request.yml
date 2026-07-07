@@ -2,7 +2,8 @@ name: 🚀 Optimisation Request
 description: Request improvements to performance, efficiency, scalability, or resource usage
 title: "[Optimisation] "
 labels:
-  - optimisation
+  - enhancement
+  - optimisation_request
 
 body:
 
