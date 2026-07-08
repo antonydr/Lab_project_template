@@ -5,19 +5,23 @@
 
 ---
 
-## ⚠️ Template Usage Note
+## 👋 Getting started
 
 This repository is a **template framework**.
 
-When instantiated for a new project, the following placeholders must be replaced automatically via GitHub Actions:
+When utalising for a new project, it is suggested you take time to perform the following:
 
-- `arose20/Lab_project_template_v2` → **current repository slug**
-- Workflow badge path (`main.yml`) → adjust if workflow name differs
-- Any hardcoded project metadata (if added later via config injection)
+- Update this README.md file for content appropriate for your project
+- Decide on how to and also curate a contributing guide
+    - This should include things like branch usage, forking, pre-commands, custom structures and workflows
+- Suggested: create a environment from `/envs/environment-dev.yml`
 
-This replacement is handled by:
+**pre-commit**
+This repository already contains a `.pre-commit-config.yaml` file so that actions are performed when trying to commit a file.
 
-> `.github/workflows/update-readme-badges.yml`
+To use this, activate a environment with the pre-commit package is installed and then run `git commit` command within this activated environment. This is included in the `/envs/environment-dev.yml`.
+
+By default, the `.pre-commit-config.yaml` is set to run linting of files trying to commit to help ensure clean code quality.
 
 ---
 
