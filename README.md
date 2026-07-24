@@ -135,6 +135,7 @@ snakemake --configfile config/config.yaml
 ## Documentation
 
 - System architecture: `docs/architecture.md`
+- Data synchronisation: `docs/datasync_cli.md`
 - Study design: `docs/study_overview.md`
 - Workflow guide: `docs/analysis_overview.md`
 - Contribution guide: `CONTRIBUTING.md`
@@ -200,6 +201,21 @@ DIR=src bash scripts/git/stage_files.sh --dry-run
 - Safely stages deletions using `git add -u`
 - Writes skipped-file logs locally in `logs/git/`
 
+---
+
+## Data syncing through custom CLI
+
+This repository has a custom CLI to utalise rsync for synchronising data between different locations e.g. a compute storage and backup storage.
+
+This is useful for the following scenarios:
+
+- Your compute resource storage isn't backed up (e.g. scratch)
+- Your backup storgae is a mounted drive
+- Your backup storage can't be accessed by a compute cluster
+
+For more information on how to use the custom CLI `datasync`, this is documented in:
+
+> **[docs/datasync_cli.md](./docs/datasync_cli.md)**
 
 ---
 
@@ -217,7 +233,7 @@ See `CITATION.cff` for structured formats.
 
 Contributors can be viewed on the project's GitHub Contributors page:
 
-https://github.com/arose20/Lab_project_template_v2/graphs/contributors
+https://github.com/antonydr/Lab_project_template/graphs/contributors
 
 ---
 
