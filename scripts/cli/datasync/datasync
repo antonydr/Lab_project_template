@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""Command-line interface for the datasync application."""
+
+import argparse
+import sys
+from pathlib import Path
+
+from interfaces.filesystems import FilesystemManager
+from interfaces.sync import SyncManager
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+sys.path.insert(0, str(PROJECT_ROOT))
+
+
+def cmd_filesystems(_args: argparse.Namespace) -> None:
+    """Display configured filesystem locations.
+
+    Args:
+        _args: Parsed command-line arguments.
+    """
+    filesystem_manager = FilesystemManager()
+
+    print("\nConfigured filesystems:\n")
+
+    for name in filesystem_manager.list_filesystems():
+        path = filesystem_manager.path(name)
+
+        print(f"  {name:20} {path}")
+
+
+def cmd_sync(args: argparse.Namespace) -> None:
+    """Execute a synchronisation command.
+
+    Args:
+        args: Parsed command-line arguments.
+    """
+    manager = SyncManager()
+
+    if args.list_syncs:
+        print("\nConfigured sync jobs:\n")
+        for job in manager.list():
+            print(f"  {job}")
+        return
+
+    if not args.job:
+        print("Error: sync job required")
+        print("Use --list to see available jobs")
+        return
+
+    manager.run(
+        args.job,
+        dry_run=args.dry_run,
+        runtime_name=args.runtime,
+        show_command=args.show_command,
+        quiet=args.quiet,
+    )
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """Build the command-line argument parser.
+
+    Returns:
+        Configured argument parser.
+    """
+    parser = argparse.ArgumentParser(
+        prog="datasync", description="Project data synchronisation CLI"
+    )
+
+    sub = parser.add_subparsers(dest="command")
+
+    #
+    # sync command
+    #
+
+    sync = sub.add_parser("sync", help="Synchronise project data")
+
+    sync.add_argument("job", nargs="?")
+
+    sync.add_argument("--dry-run", action="store_true")
+
+    sync.add_argument(
+        "--list-filesystems",
+        dest="list_filesystems",
+        action="store_true",
+        help="List configured filesystems",
+    )
+
+    sync.add_argument(
+        "--list-syncs",
+        dest="list_syncs",
+        action="store_true",
+        help="List configured sync jobs",
+    )
+
+    sync.add_argument(
+        "--runtime", default="interactive", help="Execution runtime profile"
+    )
+
+    sync.add_argument(
+        "--show_command", action="store_true", help="Show generated rsync command"
+    )
+
+    sync.add_argument("--quiet", action="store_true", help="Suppress terminal output")
+
+    sync.set_defaults(func=cmd_sync)
+
+    #
+    # filesystems
+    #
+
+    filesystem = sub.add_parser("filesystems", help="List configured filesystems")
+
+    filesystem.set_defaults(func=cmd_filesystems)
+
+    return parser
+
+
+def main() -> None:
+    """Run the datasync command-line application."""
+    parser = build_parser()
+
+    args = parser.parse_args()
+
+    if not hasattr(args, "func"):
+        parser.print_help()
+        return
+
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()
