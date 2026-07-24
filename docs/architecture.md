@@ -19,11 +19,11 @@ The system is intentionally **domain-agnostic** and does not assume any specific
 
 This framework is built around a simple model:
 
-> **Data defines inputs**
-> **Code defines transformations**
-> **Workflows define execution**
-> **Results define outputs**
-> **Exploratory is exploratory so not tracked by github and should be temporary**
+- Data defines inputs
+- Code defines transformations
+- Workflows define execution
+- Results define outputs
+- Exploratory is exploratory so **not tracked by github and should be temporary**
 
 Everything in the repository maps cleanly to one of these roles.
 
@@ -92,7 +92,7 @@ logs/          → execution logs and runtime traces
 
 tests/         → validation and correctness checks
 docs/          → documentation and design notes
-assets/        → static resources (schemas, templates, configs)
+assets/        → static resources (schemas, templates)
 
 exploratory/   → temporary workspace not tracked
 ```
@@ -129,13 +129,13 @@ Use these rules:
 
 ### 2. Is it computation logic or execution?
 - Logic → `src/`
-- Execution → `workflows/`, `scripts/`
+- Execution → `workflows/`, `scripts/`, `notebooks/`
 
 ---
 
 ### 3. Is it exploratory or communicative?
 - Yes → `notebooks/` or `results/reports/`
-- No → `src/`
+- No → `src/` or `scripts/`
 
 ---
 
@@ -159,7 +159,10 @@ A result is reproducible if it can be regenerated using:
 - fixed environment (`envs/`)
 - raw or processed data (`data/`)
 - source code (`src/`)
+- scripted code (`src/`)
 - workflow definition (`workflows/`)
+
+It can also be reproducible using notebooks but better to pass into script if possible.
 
 ---
 
@@ -192,13 +195,13 @@ conda activate project_env
 
 ```bash
 # Run workflow
-nextflow run workflows/main.nf -params-file config/config.yaml
+nextflow run workflows/main.nf -params-file config/nextflow.yaml
 ```
 
 or
 
 ```bash
-snakemake --configfile config/config.yaml
+snakemake --configfile config/snakemake.yaml
 ```
 
 ---
@@ -211,7 +214,7 @@ The system provides multiple entry points:
 - scripts/ → lightweight automation
 - notebooks/ → exploratory analysis
 
-All interfaces must call logic from `src/` or `workflows/`.
+All interfaces must call logic from `src/`, `scripts/` or `workflows/`.
 
 ---
 
@@ -243,30 +246,13 @@ Logs are **operational artifacts**, not scientific outputs.
 
 ---
 
-## Documentation
-
-- Architecture: `docs/architecture.md`
-- Usage: `docs/usage.md`
-- Workflows: `docs/workflows.md`
-- Development: `docs/development.md`
-
----
-
 ## Key Constraint
 
-> This repository must remain valid across scientific domains.
+> This repository is designed as a template when first initatied so must remain valid across scientific domains.
 
 Therefore:
 - no domain-specific assumptions
 - no method-specific folder design
 - no hardcoded analytical paradigms
 
----
-
-## Citation
-
-If you use this framework:
-
-> [Insert citation here]
-
-See `CITATION.cff` for formats.
+This will change during implementation.
