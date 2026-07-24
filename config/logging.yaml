@@ -1,0 +1,9 @@
+logging:
+
+    enabled: true
+
+    directory: logs
+
+    filename_format:
+
+      sync: "{command}_{sync_name}_{timestamp}.log"

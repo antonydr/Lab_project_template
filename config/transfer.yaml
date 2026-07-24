@@ -1,0 +1,31 @@
+transfer:
+
+  engine: rsync
+
+
+  rsync:
+    archive: true
+    preserve_owner: false
+    preserve_group: false
+    verbose: false
+    human_readable: true
+    progress: true
+    partial: true
+    delete_delay: true
+
+    exclude_patterns:
+
+    # Housekeeping
+      - .git/
+      - .venv/
+      - __pycache__/
+      - .pytest_cache/
+      - .ruff_cache/
+      - "*.pyc"
+      - "*.tmp"
+      - "*.log"
+
+    # Folder structures
+      - data/raw/
+      - logs/
+      - exploratory/

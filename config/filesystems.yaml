@@ -1,0 +1,39 @@
+filesystems:
+
+  compute_storage:
+
+    type: posix
+
+    host: server
+
+    path: /path/to/projects/root/folder
+
+    description: >
+      High-performance compute storage used for active analysis.
+      Data may be removed by system policies.
+
+    properties:
+
+      compute_access: true
+
+      backup: false
+
+
+
+  persistent_storage:
+
+    type: posix
+
+    host: backup_server
+
+    path: /path/to/projects/root/folder
+
+    description: >
+      Long-term backed-up storage containing project data,
+      processed outputs and reproducible analysis states.
+
+    properties:
+
+      compute_access: false
+
+      backup: true

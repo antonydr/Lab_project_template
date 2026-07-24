@@ -1,0 +1,23 @@
+environments:
+  # Define the execution environments and the filesystems available within
+  # each environment. These names are referenced by sync definitions.
+  server:
+
+    type: hpc
+
+    scheduler: slurm
+
+    filesystems:
+
+      - server_projects
+      - backup_area
+
+
+
+  workstation:
+
+    type: workstation
+
+    filesystems:
+
+      - local_projects

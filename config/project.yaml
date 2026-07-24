@@ -1,0 +1,31 @@
+project:
+
+  name: project_name
+  title: My Project Title
+  type:
+    - type1
+    - type2
+  description: This is a sample project configuration file.
+  owner: John Doe
+  organisation: My Organization
+
+  reproducibility:
+    random_seed: 42
+
+  directories:
+    data: data
+    docs: docs
+    envs: envs
+    exploratory: exploratory
+    interfaces: interfaces
+    logs: logs
+    notebooks: notebooks
+    results: results
+    scripts: scripts
+    src: src
+    tests: tests
+    workflows: workflows
+
+  conventions:
+    date_format: "%Y%m%d"
+    timestamp_format: "%Y%m%d_%H%M%S"

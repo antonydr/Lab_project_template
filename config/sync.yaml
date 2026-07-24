@@ -1,0 +1,36 @@
+syncs:
+
+  stage_in:
+
+    source:
+      filesystem: persistent_storage
+      path: root_folder_test
+
+    destination:
+      filesystem: compute_storage
+      path: test_folder_data_sync
+
+    options:
+      # Keep any stale files on the compute storage until they are explicitly
+      # replaced, avoiding unnecessary deletion work during staging.
+      delete_delay: false
+
+
+  stage_out:
+
+    source:
+      filesystem: compute_storage
+      path: test_folder_data_sync
+
+    destination:
+      filesystem: persistent_storage
+      path: root_folder_test
+
+    options:
+      # Delay deletions until the transfer has completed to minimise the risk
+      # of leaving the persistent storage in a partially synchronised state.
+      delete_delay: true
+
+      # Exclude transient working data that should not be persisted.
+      additional_exclude_patterns:
+        - "test_work_area/"

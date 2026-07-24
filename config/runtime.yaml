@@ -1,0 +1,23 @@
+runtimes:
+
+  interactive:
+
+    type: terminal
+    output:
+      show_command: false
+      show_progress: true
+      verbose: false
+
+  debug:
+    type: terminal
+    output:
+      show_command: true
+      show_progress: true
+      verbose: true
+
+  batch:
+    type: scheduler
+    output:
+      show_command: false
+      show_progress: false
+      verbose: false
