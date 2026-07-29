@@ -81,7 +81,7 @@ A simple directory structure is recommended.
 ```text
 containers/
 ├── def/
-│   └── scanpy_basic.def
+│   └── sc_basic.def
 ├── sandbox/
 ├── sif/
 ├── registry/
