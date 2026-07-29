@@ -16,14 +16,6 @@ When utalising for a new project, it is suggested you take time to perform the f
     - This should include things like branch usage, forking, pre-commands, custom structures and workflows
 - Suggested: create a environment from `/envs/environment-dev.yml`
 
-#### **pre-commit**
-This repository already contains a `.pre-commit-config.yaml` file so that actions are performed when trying to commit a file.
-
-To use this, activate a environment with the pre-commit package is installed and then run `git commit` command within this activated environment. This is included in the `/envs/environment-dev.yml`.
-
-By default, the `.pre-commit-config.yaml` is set to run linting of files trying to commit to help ensure clean code quality.
-
-
 #### **environment-dev creation**
 
 Most environment curations can be used to curate an environment to install pre-commit and other packages for project management/maintenance. 
@@ -50,6 +42,15 @@ module load Miniforge
 # Create your environment securely from the project file
 mamba env create -f /envs/environment-dev.yml
 ```
+
+#### **pre-commit**
+This repository already contains a `.pre-commit-config.yaml` file so that actions are performed when trying to commit a file.
+
+To use this, activate a environment with the pre-commit package is installed and then run `git commit` command within this activated environment. This is included in the `/envs/environment-dev.yml`.
+
+By default, the `.pre-commit-config.yaml` is set to run linting of files trying to commit to help ensure clean code quality.
+
+Note: **make sure to run** `pre-commit install` inside the activated environment to ensure it will run when commiting files since it will then add the git hook.
 
 ---
 
