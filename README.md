@@ -18,9 +18,9 @@ When utalising for a new project, it is suggested you take time to perform the f
 
 #### **environment-dev creation**
 
-Most environment curations can be used to curate an environment to install pre-commit and other packages for project management/maintenance. 
+Most environment curations can be used to curate an environment to install pre-commit and other packages for project management/maintenance.
 
-As there is already an `/envs/environment-dev.yml`, creating an environment from this will keep your local environment and the environment GitHub actions will use in sync. 
+As there is already an `/envs/environment-dev.yml`, creating an environment from this will keep your local environment and the environment GitHub actions will use in sync.
 
 To curate an environment from the yml file, some suggestions include:
 
@@ -40,7 +40,7 @@ Instead of installing your own Conda distribution on the cluster, you should loa
 module load Miniforge
 
 # Create your environment securely from the project file
-mamba env create -f /envs/environment-dev.yml
+mamba env create -f ./envs/environment-dev.yml -c conda-forge
 ```
 
 #### **pre-commit**
