@@ -130,11 +130,15 @@ Full system design and architecture is documented in:
 
 ## Getting Started
 
-### Setup environment
+### Setup environments
+
+For better details regarding reproducible environment setup see **[docs/container_construction.md](./docs/container_construction.md)**.
+
+For working with this template it is recommended management is done using `envs/environment-dev.yml` so it also aligns with github actions. This also allows usage of pre-commit and pyyaml.
 
 ```bash
-conda env create -f envs/environment.yaml
-conda activate project_env
+mamba create -f ./envs/environment-dev.yml -c conda-forge
+conda activate environment-dev
 ```
 
 ---
