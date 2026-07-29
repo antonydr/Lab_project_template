@@ -1,0 +1,42 @@
+containers:
+
+  # Individual container metadata
+  kernels:
+    directory: config/kernels
+
+
+  # Container build recipes
+  definitions:
+    directory: envs/containers
+
+
+  # Container image locations
+  images:
+
+    # Apptainer / Singularity
+    #
+    # Images are files:
+    #   container.sif
+    #
+    apptainer:
+      enabled: true
+      directory: /path/to/apptainer/container/sifs
+
+
+    # Docker
+    #
+    # Docker images are normally managed by the Docker daemon.
+    # No filesystem directory is required.
+    #
+    docker:
+      enabled: false
+      registry: local
+      storage: default
+
+    # Podman
+    #
+    # Similar model to Docker but rootless storage.
+    #
+    podman:
+      enabled: false
+      storage: default

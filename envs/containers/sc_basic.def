@@ -1,0 +1,88 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%labels
+    Author you
+    Purpose "Single-cell/nuclei + spatial analysis: scanpy/squidpy/spatialdata (Python) + Seurat/rpy2/IRkernel (R) - CPU only"
+
+%post
+    set -e
+    export DEBIAN_FRONTEND=noninteractive
+
+    # ---- Environment name ----
+    ENV_NAME=sc_basic
+    PYTHON_DISPLAY_NAME="Python (${ENV_NAME})"
+    R_DISPLAY_NAME="R (${ENV_NAME})"
+    # ---- System packages ----
+    apt-get update
+    apt-get install -y --no-install-recommends \
+        wget ca-certificates bzip2 git build-essential pkg-config \
+        libcurl4-openssl-dev libssl-dev libxml2-dev \
+        libfontconfig1-dev libharfbuzz-dev libfribidi-dev \
+        libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev \
+        zlib1g-dev libgit2-dev
+
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+
+    # ---- Install micromamba ----
+    export MAMBA_ROOT_PREFIX=/opt/conda
+    mkdir -p ${MAMBA_ROOT_PREFIX}
+
+    wget -qO- https://micro.mamba.pm/api/micromamba/linux-64/latest \
+        | tar -xvj -C /tmp bin/micromamba
+    mv /tmp/bin/micromamba /usr/local/bin/micromamba
+
+    # ---- Create environment ----
+    micromamba create -y \
+        -n ${ENV_NAME} \
+        -c conda-forge \
+        -c bioconda \
+        python=3.11 \
+        scanpy \
+        squidpy \
+        spatialdata \
+        spatialdata-io \
+        r-base=4.3 \
+        r-essentials \
+        r-seurat \
+        r-irkernel \
+        rpy2 \
+        ipykernel \
+        jupyterlab \
+        notebook \
+        nbformat \
+        nbconvert \
+        jupyter_client
+
+    micromamba clean -a -y
+
+    export PATH=/opt/conda/envs/${ENV_NAME}/bin:$PATH
+
+    # ---- Python kernel ----
+    python -m ipykernel install \
+        --name ${ENV_NAME} \
+        --display-name "${PYTHON_DISPLAY_NAME}" \
+        --prefix=/usr/local
+
+    # ---- R kernel ----
+    R --no-save <<EOF
+    IRkernel::installspec(
+        name="${ENV_NAME}-r",
+        displayname="${R_DISPLAY_NAME}",
+        prefix="/usr/local"
+    )
+    EOF
+
+%environment
+    export MAMBA_ROOT_PREFIX=/opt/conda
+    export PATH=/opt/conda/envs/${ENV_NAME}/bin:$PATH
+    export R_HOME=/opt/conda/envs/${ENV_NAME}/lib/R
+    export LD_LIBRARY_PATH=/opt/conda/envs/${ENV_NAME}/lib:${LD_LIBRARY_PATH}
+
+%runscript
+    exec /opt/conda/envs/${ENV_NAME}/bin/python "$@"
+
+%test
+    python -c "import scanpy, squidpy, spatialdata"
+    R -q -e "library(Seurat); library(IRkernel)"

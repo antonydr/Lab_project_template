@@ -1,0 +1,37 @@
+name: sc_basic
+
+version: 1.0
+
+image: /path/to/continaer/image/sif/sc_basic.sif
+
+type: apptainer
+
+language:
+  - python
+  - r
+
+python:
+  executable: python
+  kernel_name: sc_basic
+  display_name: "Python (sc_basic 1.0)"
+
+r:
+  kernel_name: sc_basic-r
+  display_name: "R (sc_basic 1.0)"
+
+resources:
+  gpu: false
+  cpu: true
+
+packages:
+  python:
+    - scanpy
+    - squidpy
+    - spatialdata
+
+  r:
+    - Seurat
+    - IRkernel
+
+created:
+  definition: sc_basic.def
