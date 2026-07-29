@@ -16,12 +16,40 @@ When utalising for a new project, it is suggested you take time to perform the f
     - This should include things like branch usage, forking, pre-commands, custom structures and workflows
 - Suggested: create a environment from `/envs/environment-dev.yml`
 
-**pre-commit**
+#### **pre-commit**
 This repository already contains a `.pre-commit-config.yaml` file so that actions are performed when trying to commit a file.
 
 To use this, activate a environment with the pre-commit package is installed and then run `git commit` command within this activated environment. This is included in the `/envs/environment-dev.yml`.
 
 By default, the `.pre-commit-config.yaml` is set to run linting of files trying to commit to help ensure clean code quality.
+
+
+#### **environment-dev creation**
+
+Most environment curations can be used to curate an environment to install pre-commit and other packages for project management/maintenance. 
+
+As there is already an `/envs/environment-dev.yml`, creating an environment from this will keep your local environment and the environment GitHub actions will use in sync. 
+
+To curate an environment from the yml file, some suggestions include:
+
+- **conda** / **miniconda** (Ensure you use community channels like `conda-forge`. Standard installations pull from Anaconda's proprietary `defaults` channel, which requires a paid commercial license for organisations with 200+ employees).
+- **mamba** / **micromamba** (Recommended. Faster, open-source alternatives that use community channels out of the box and bypass commercial licensing restrictions).
+
+If working on a High-Performance Computing (HPC) cluster, administrators will have strict rules around Conda tools to avoid these licensing liabilities. Most HPC sites explicitly block or ban standard Anaconda installations.
+
+To make compliance simple, HPCs usually provide pre-installed software modules that are pre-configured to strictly use free, open-source package repositories (like `conda-forge`).
+
+##### **Using HPC Pre-Set Modules**
+
+Instead of installing your own Conda distribution on the cluster, you should load the system's pre-configured toolset. For example, loading a module named **Miniforge** already configured on a HPC to automatically give you access to license-compliant versions of both `conda` and `mamba`:
+
+```bash
+# Load the pre-configured, cluster-safe Miniforge module
+module load Miniforge
+
+# Create your environment securely from the project file
+mamba env create -f /envs/environment-dev.yml
+```
 
 ---
 
