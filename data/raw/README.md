@@ -1,6 +1,6 @@
 # Raw Data
 
-This directory contains immutable, source-level data directly generated from upstream pipelines or external providers (e.g. CellRanger, Spaceranger, FASTQ processing outputs, Kraken reports).
+This directory contains immutable, source-level data directly generated from upstream pipelines or external providers (e.g. CellRanger, Spaceranger, FASTQ).
 
 ## Key properties
 - Never modified after ingestion

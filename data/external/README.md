@@ -14,3 +14,4 @@ These are not produced by this project but are used as inputs or references.
 - Must include source and version where possible
 - Should not be modified
 - Should be explicitly documented in metadata
+- ideally curate checksum
