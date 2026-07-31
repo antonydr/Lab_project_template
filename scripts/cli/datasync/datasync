@@ -5,13 +5,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from interfaces.filesystems import FilesystemManager
-from interfaces.sync import SyncManager
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-
-sys.path.insert(0, str(PROJECT_ROOT))
-
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 def cmd_filesystems(_args: argparse.Namespace) -> None:
     """Display configured filesystem locations.
@@ -118,6 +112,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     """Run the datasync command-line application."""
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+    from interfaces.filesystems import FilesystemManager
+    from interfaces.sync import SyncManager
+
     parser = build_parser()
 
     args = parser.parse_args()
