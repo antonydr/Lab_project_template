@@ -11,8 +11,10 @@ syncs:
       path: test_folder_data_sync
 
     options:
-      # Keep any stale files on the compute storage until they are explicitly
-      # replaced, avoiding unnecessary deletion work during staging.
+      # Do not delay deletions during staging.
+      #
+      # Stale files already present on compute_storage are retained unless
+      # deletion is explicitly enabled.
       delete_delay: false
 
 
@@ -27,10 +29,17 @@ syncs:
       path: root_folder_test
 
     options:
-      # Delay deletions until the transfer has completed to minimise the risk
-      # of leaving the persistent storage in a partially synchronised state.
-      delete_delay: true
+      # Delay deletion of files until after transfers complete.
+      #
+      # This reduces the risk of persistent_storage being left partially
+      # updated if a transfer fails midway. Enable only when this location
+      # should behave as a mirror of compute_storage.
+      #
+      # For archival behaviour, leave deletion disabled so files removed from
+      # compute_storage remain available on persistent_storage.
+      delete_delay: false
 
       # Exclude transient working data that should not be persisted.
       additional_exclude_patterns:
+        - "exploratory/"
         - "test_work_area/"
