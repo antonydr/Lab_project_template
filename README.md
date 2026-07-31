@@ -261,12 +261,19 @@ For more information on how to use the custom CLI `datasync`, this is documented
 
 ## Citation
 
-If you use this repository, please cite:
+This repository contains a `CITATION.cff` file describing how to cite
+the template itself.
 
-> Rose, A. (2024). Lab_project_template [Computer software]. GitHub.
+When creating a new project from this template:
+
+1. Copy `CITATION_TEMPLATE.cff` to `CITATION.cff`
+2. Replace the placeholder metadata with details of your project
+3. Add authors, version, repository URL, and publication details if available
+
+If you adapt this template structure, please consider acknowledging the original template:
+
+> Rose, A. (2026). *Lab_project_template*. GitHub.
 > https://github.com/antonydr/Lab_project_template
-
-See `CITATION.cff` for structured formats.
 
 ---
 
