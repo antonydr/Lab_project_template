@@ -1,8 +1,60 @@
 ################################################################################
+# USER PROJECT-SPECIFIC IGNORES
+#
+# Add project-dependent files and folders here.
+# Keep general rules elsewhere.
+################################################################################
+
+
+################################################################################
+# Data lifecycle policy
+#
+# Edit this section for project data organisation.
+################################################################################
+
+# Data
+data/*
+!data/**/
+!data/**/README.md
+
+# Runtime and pipeline outputs
+logs/*
+!logs/external/
+
+results/*
+!results/**/
+!results/**/README.md
+
+work/*
+!work/**/
+!work/**/README.md
+
+# Exploratory outputs (keep README tracked)
+exploratory/*
+!exploratory/README.md
+
+# Temporary folders
+tmp/
+temp/
+
+################################################################################
+# Local configuration
+################################################################################
+
+.env
+.env.*
+*.secret
+*.credentials
+config.local.*
+
+
+################################################################################
 # OS / system files
 ################################################################################
 
 .DS_Store
+.AppleDouble
+.LSOverride
 Thumbs.db
 Desktop.ini
 
@@ -10,92 +62,149 @@ Desktop.ini
 *.swp
 *.swo
 
-################################################################################
-# Python cache / bytecode
-################################################################################
-
-__pycache__/
-**/__pycache__/
-*.pyc
-*.pyo
 
 ################################################################################
-# Packaging
+# Archives
+# Ignore archive formats, but keep standalone compressed data files (.gz)
 ################################################################################
 
-*.egg-info/
-build/
-dist/
+*.tar
+*.tar.gz
+*.zip
+*.bz2
+*.xz
+*.7z
+*.rar
+*.Z
+
 
 ################################################################################
+# Language: Python
+################################################################################
+
 # Virtual environments
-################################################################################
-
 venv/
 .venv/
 env/
-conda-env/
+
+# Python cache / bytecode
+__pycache__/
+*.py[cod]
+
+# Packaging
+*.egg-info/
+build/
+dist/
+pip-wheel-metadata/
+
+# Python tooling
+.python-version
+.pytest_cache/
+.coverage
+htmlcov/
+
+.tox/
+.mypy_cache/
+.pyright/
+.pyre/
+.pytype/
+.ruff_cache/
+
 
 ################################################################################
-# IDEs
+# Language: R
+################################################################################
+
+.Rproj.user/
+.Ruserdata
+
+*.rds
+*.RData
+*.Rhistory
+*.RDataTmp
+
+
+################################################################################
+# Language: Jupyter / notebooks
+################################################################################
+
+.ipynb_checkpoints/
+
+
+################################################################################
+# Language: Conda / Mamba / Micromamba
+################################################################################
+
+# Environments and local package metadata
+conda-env/
+.conda/
+.mamba/
+.micromamba/
+
+# Local environment directories
+miniconda/
+miniconda3/
+anaconda/
+anaconda3/
+
+# Conda package caches
+pkgs/
+
+# Environment backups
+environment.yml.bak
+
+# Conda/Mamba package files
+*.conda
+*.mamba
+
+# Built images
+*.sif
+
+################################################################################
+# IDEs / editors
 ################################################################################
 
 .vscode/
 .idea/
 *.code-workspace
 
-################################################################################
-# Jupyter / notebooks
-################################################################################
-
-.ipynb_checkpoints/
-*/.ipynb_checkpoints/
-*.ipynb_checkpoints
 
 ################################################################################
-# Logs (runtime artifacts only)
+# Logs / runtime artifacts
 ################################################################################
 
-logs/
 *.log
 
-# HPC / cluster logs
+logs/git/*
+!logs/git/.gitkeep
+
 slurm-*.out
 slurm-*.err
+slurm-*.log
+
+*.o[0-9]*
+*.e[0-9]*
+
+
+################################################################################
+# Reports / documents
+################################################################################
+
+.quarto/
+
+*.aux
+*.toc
 *.out
-*.err
+
 
 ################################################################################
-# Python testing / tooling
-################################################################################
-
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-
-################################################################################
-# Ruff cache
-################################################################################
-
-.ruff_cache/
-
-################################################################################
-# Conda / environment artifacts
-################################################################################
-
-*.conda
-environment.yml.bak
-
-################################################################################
-# Temporary / misc
+# Temporary / miscellaneous files
 ################################################################################
 
 *.tmp
 *.bak
-tmp/
-temp/
 .sync/
+
 
 ################################################################################
 # Workflow engines
@@ -103,20 +212,48 @@ temp/
 
 # Nextflow
 .nextflow/
-work/
-*.nextflow.log
+.nextflow.log*
+.nextflow.history
+.nf-work/
+
+# Nextflow generated reports
+report.html
+timeline.html
+trace.txt
+dag.html
 
 # Snakemake
 .snakemake/
 
-################################################################################
-# Git staging utility logs
-################################################################################
-logs/git/*
-!logs/git/.gitkeep
 
 ################################################################################
-# Bioinformatics - sequencing data (raw / large files)
+# Computational caches
+################################################################################
+
+.cache/
+
+
+################################################################################
+# Matrix Market formats
+################################################################################
+
+*.mtx
+*.mtx.*
+*.mtx.gz
+*.mtx.zip
+
+
+################################################################################
+# Model artifacts
+################################################################################
+
+*.pt
+*.sav
+*.pkl
+
+
+################################################################################
+# Bioinformatics - sequencing data
 ################################################################################
 
 *.bam
@@ -137,40 +274,13 @@ logs/git/*
 *contig_info.pb
 *vdj_reference/
 
-################################################################################
-# Matrix Market formats
-################################################################################
-
-*.mtx
-*.mtx.*
-*.mtx.gz
-*.mtx.zip
-
-################################################################################
-# Model artifacts
-################################################################################
-
-*.pt
-*.sav
-*.pkl
-
-################################################################################
-# R artifacts
-################################################################################
-
-*.rds
-*.RData
-*.Rhistory
-*.RDataTmp
-.Rproj.user/
-.Ruserdata
 
 ################################################################################
 # Single-cell / multimodal analysis objects
-# (ONLY ignore when stored in data layers)
+#
+# Treated as derived artifacts.
 ################################################################################
 
-# These are treated as derived artifacts, not source data
 data/interim/*.h5ad
 data/interim/*.h5Seurat
 data/interim/*.h5mu
@@ -182,6 +292,7 @@ data/processed/objects/*.h5mu
 # Optional: generic HDF5 (use with caution)
 *.h5
 
+
 ################################################################################
 # 10x Genomics outputs
 ################################################################################
@@ -189,57 +300,35 @@ data/processed/objects/*.h5mu
 **/filtered_feature_bc_matrix/**
 **/raw_feature_bc_matrix/**
 
+
 ################################################################################
-# Generated analysis outputs (domain-specific)
+# Generated analysis outputs
 ################################################################################
 
 **/*graphclust/clusters.csv
 **/*clusters/clusters.csv
+
 **/*graphclust/differential_expression.csv
 **/*clusters/differential_expression.csv
+
 
 ################################################################################
 # Reference genomes / annotation bundles
 ################################################################################
 
-**/*GRCh38-2020-A/**
-**/*GRCh38-7_0_0/**
+**/*GRCh38-2020-A/
+**/*GRCh38-7_0_0/
+
 
 ################################################################################
-# Gene / barcode files (generated or redundant copies)
+# Gene / barcode files
 ################################################################################
 
 barcodes.tsv
 barcodes.tsv.gz
+
 features.tsv
 features.tsv.gz
+
 genes.tsv
 genes.tsv.gz
-
-################################################################################
-# Archives (safe set only — no loose .gz)
-################################################################################
-
-*.tar
-*.tar.gz
-*.zip
-*.bz2
-*.xz
-*.7z
-*.rar
-*.Z
-
-################################################################################
-# Data lifecycle policy (structural enforcement)
-################################################################################
-
-data/cache/
-logs/
-results/
-work/
-
-################################################################################
-# Exploratory
-################################################################################
-exploratory/*
-!exploratory/README.md
