@@ -16,6 +16,7 @@
 data/*
 !data/**/
 !data/**/README.md
+!data/provenance/**
 
 # Runtime and pipeline outputs
 logs/*
