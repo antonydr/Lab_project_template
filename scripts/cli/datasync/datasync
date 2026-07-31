@@ -9,8 +9,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from interfaces.filesystems import FilesystemManager  # ruff: noqa: E402
-from interfaces.sync import SyncManager  # ruff: noqa: E402
+from interfaces.filesystems import FilesystemManager  # noqa: E402
+from interfaces.sync import SyncManager  # noqa: E402
 
 
 def cmd_filesystems(_args: argparse.Namespace) -> None:
