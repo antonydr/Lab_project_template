@@ -80,14 +80,7 @@ def build_parser() -> argparse.ArgumentParser:
     sync.add_argument("--dry-run", action="store_true")
 
     sync.add_argument(
-        "--list-filesystems",
-        dest="list_filesystems",
-        action="store_true",
-        help="List configured filesystems",
-    )
-
-    sync.add_argument(
-        "--list-syncs",
+        "--list",
         dest="list_syncs",
         action="store_true",
         help="List configured sync jobs",
