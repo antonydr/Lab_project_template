@@ -52,6 +52,13 @@ By default, the `.pre-commit-config.yaml` is set to run linting of files trying 
 
 Note: **make sure to run** `pre-commit install` inside the activated environment to ensure it will run when commiting files since it will then add the git hook.
 
+#### **Update docs**
+It is recommended to construct the below files when starting a new project
+
+- Study design: `docs/study_overview.md`
+- Workflow guide: `docs/analysis_overview.md`
+- Contribution guide: `CONTRIBUTING.md`
+
 ---
 
 ## Overview
