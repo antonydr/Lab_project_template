@@ -48,6 +48,14 @@ class SyncManager:
             A sorted list of configured runtime names.
         """
         return sorted(self.runtime.get("runtimes", {}).keys())
+    
+    def list(self) -> list[str]:
+        """Return available synchronisation job names.
+
+        Returns:
+            A sorted list of configured synchronisation names.
+        """
+        return sorted(self.sync["syncs"].keys())
 
     def list_filesystems(self) -> list[str]:
         """Return available synchronisation job names.
