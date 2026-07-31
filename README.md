@@ -263,7 +263,8 @@ For more information on how to use the custom CLI `datasync`, this is documented
 
 If you use this repository, please cite:
 
-> [Insert citation]
+> Rose, A. (2024). Lab_project_template [Computer software]. GitHub.
+> https://github.com/antonydr/Lab_project_template
 
 See `CITATION.cff` for structured formats.
 
