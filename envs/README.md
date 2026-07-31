@@ -33,7 +33,7 @@ As there is already an `/envs/environment-dev.yml`, creating an environment from
 To curate an environment from the yml file, some suggestions include:
 
 - **conda** / **miniconda** (Ensure you use community channels like `conda-forge`. Standard installations pull from Anaconda's proprietary `defaults` channel, which requires a paid commercial license for organisations with 200+ employees).
-- **mamba** / **micromamba** (Recommended. Faster, open-source alternatives that use community channels out of the box and bypass commercial licensing restrictions).
+- **mamba** / **micromamba** (Recommended. Considered faster which include open-source alternatives).
 
 If working on a High-Performance Computing (HPC) cluster, administrators will have strict rules around Conda tools to avoid these licensing liabilities. Most HPC sites explicitly block or ban standard Anaconda installations.
 
