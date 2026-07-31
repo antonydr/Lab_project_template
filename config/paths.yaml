@@ -1,11 +1,61 @@
-project_root: .
+project:
+  root: .
 
-directories:
-  raw: data/raw
-  interim: data/interim
-  processed: data/processed
+assets:
+  root: assets
+
+config:
+  root: config
+  kernels: config/kernels
+
+data:
+  root: data
   external: data/external
-  cache: cache
-  logs: logs
-  resukts: results
-  reports: reports
+  metadata: data/metadata
+  processed: data/processed
+  provenance: data/provenance
+  raw: data/raw
+  
+docs:
+  root: docs
+
+envs:
+  root: envs
+  containers: envs/containers
+
+exploratory:
+  root: exploratory
+
+interfaces:
+  root: interfaces
+
+logs:
+  root: logs
+
+notebooks:
+  root: notebooks
+
+results:
+  root: results
+  embeddings: results/embeddings
+  exports: results/exports
+  figures: results/figures
+  models: results/models
+  reports: results/reports
+  supplementary: results/supplementary
+  tables: results/tables
+
+scripts:
+  root: scripts
+  cli: scripts/cli
+  containers: scripts/containers
+  git: scripts/git
+
+src:
+  root: src
+
+tests:
+  root: tests
+
+workflows:
+  root: workflows
