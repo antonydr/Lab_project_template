@@ -57,14 +57,6 @@ class SyncManager:
         """
         return sorted(self.sync["syncs"].keys())
 
-    def list_filesystems(self) -> list[str]:
-        """Return available synchronisation job names.
-
-        Returns:
-            A sorted list of configured synchronisation names.
-        """
-        return sorted(self.sync["syncs"].keys())
-
     def run(
         self,
         name: str,
