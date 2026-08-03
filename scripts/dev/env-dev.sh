@@ -14,8 +14,8 @@ fi
 set -e
 
 # Activate module if required
-echo "Loading MiniForge module..."
-module load MiniForge
+echo "Loading Miniforge module..."
+module load Miniforge
 
 # Activate conda env
 echo "Activating conda environment: environment-dev"
