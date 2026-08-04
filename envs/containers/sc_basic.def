@@ -13,6 +13,8 @@ From: ubuntu:22.04
     ENV_NAME=sc_basic
     PYTHON_DISPLAY_NAME="Python (${ENV_NAME})"
     R_DISPLAY_NAME="R (${ENV_NAME})"
+
+    echo "ENV_NAME=${ENV_NAME}" > /etc/env.conf
     # ---- System packages ----
     apt-get update
     apt-get install -y --no-install-recommends \
@@ -55,6 +57,22 @@ From: ubuntu:22.04
         nbconvert \
         jupyter_client
 
+    # ---- Save exact package lock for this environment ----
+    micromamba list \
+        -n ${ENV_NAME} \
+        --explicit \
+        > /opt/${ENV_NAME}-explicit.txt
+
+    # Optional: save readable environment descriptions
+    micromamba env export \
+        -n ${ENV_NAME} \
+        --from-history \
+        > /opt/${ENV_NAME}-history.yml
+
+    micromamba env export \
+        -n ${ENV_NAME} \
+        > /opt/${ENV_NAME}-environment.yml
+
     micromamba clean -a -y
 
     export PATH=/opt/conda/envs/${ENV_NAME}/bin:$PATH
@@ -66,15 +84,16 @@ From: ubuntu:22.04
         --prefix=/usr/local
 
     # ---- R kernel ----
-    R --no-save <<EOF
+    R --no-save -e "
     IRkernel::installspec(
-        name="${ENV_NAME}-r",
-        displayname="${R_DISPLAY_NAME}",
-        prefix="/usr/local"
+        name='${ENV_NAME}-r',
+        displayname='${R_DISPLAY_NAME}',
+        prefix='/usr/local'
     )
-    EOF
+    "
 
 %environment
+    source /etc/env.conf
     export MAMBA_ROOT_PREFIX=/opt/conda
     export PATH=/opt/conda/envs/${ENV_NAME}/bin:$PATH
     export R_HOME=/opt/conda/envs/${ENV_NAME}/lib/R
