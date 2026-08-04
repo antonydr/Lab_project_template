@@ -34,7 +34,7 @@ The overall workflow is:
 | [Step 7 — Configure Jupyter Runtime Directory](#step-7--configure-jupyter-runtime-directory) | Ensuring Jupyter runtime paths are consistent for VS Code communication. |
 | [Step 8 — Register the Container](#step-8--register-the-container) | Registering the Apptainer image as a Jupyter kernel using the YAML registry. |
 | [Step 9 — Using the Container in VS Code](#step-9--using-the-container-in-vs-code) | Selecting and launching registered container kernels from VS Code notebooks. |
-| [Building shell script](#building-shell-script) | Shell script note for assisting in apptainer image construction. |
+| [Step 10 — Extracting package information for traceability](#step_10--extracting-package-information-for-traceability) | Export detailed package information for the environment in the container. |
 | [Troubleshooting](#troubleshooting) | Diagnosing common kernel startup, runtime directory, and container execution issues. |
 | [Best Practices](#best-practices) | Recommendations for reproducible builds, version control, and maintaining containers. |
 | [Files Included](#files-included) | Summary of scripts and configuration files required for the workflow. |
@@ -68,9 +68,9 @@ or, if you need a specific version:
 module load apptainer/1.4.1
 ```
 
-This work assumes apptainer has been installed prior, most likely as a module. 
+This work assumes apptainer has been installed prior, most likely as a module.
 
-As we are working with Jupyter, this workflow assumes you are also working in a virtual environment (e.g. `venv`) with `Jupyter` installed so can manage kernels. This is needed when registering kernels. 
+As we are working with Jupyter, this workflow assumes you are also working in a virtual environment (e.g. `venv`) with `Jupyter` installed so can manage kernels. This is needed when registering kernels.
 
 ---
 
@@ -115,6 +115,7 @@ project/
 │   └── containers/
 │       ├── apptainer_kernel_launcher.sh
 │       ├── build_container.sh
+│       ├── extract_container_provenance.sh
 │       └── register_container_kernel.py
 ```
 
@@ -232,6 +233,23 @@ apptainer build \
 ```
 
 The SIF image is the version intended for long-term use.
+
+
+### Alternatively
+
+To aid in construction, a `build_container.sh` script is provided in `/scripts/containers/`.
+
+This can help run the apptainer commands for building the `.sif` image ensuring the `.yaml` and `.def` files are present and correctly formatted. 
+
+Constructing the `.yaml` is covered in step 5 but if this is constructed prior to building the `.sif` then the below command can be run instead:
+
+```bash
+./scripts/containers/build_container.sh sc_basic
+```
+
+This shell script assumes you have a `.def` and `.yaml` with matching names. 
+
+Note: it will use the same name throughout so if want a different name for `.yaml`, `.def` or `.sif` perform steps manually.
 
 ---
 
@@ -363,7 +381,7 @@ Once registered:
 
 1. Open a notebook
 2. Click **Select Another Kernel...**
-3. Click **Jupyter Kernal...** 
+3. Click **Jupyter Kernal...**
 4. Select the desired kernel
 
 ```
@@ -380,13 +398,39 @@ VS Code will then launch the container automatically.
 
 ---
 
-# Building shell script
+## Step 10 — Extract package information for traceability
 
-To aid in construction, a `build_container.sh` script is provided in `/scripts/containers/`. 
+To make it possible to recreate the container environment in the future—even if the original `.def` file or built `.sif` image is no longer available—extract and archive the following files generated during the container build process:
 
-This can help run the apptainer commands for building the `.sif` image ensuring the `.yaml` and `.def` files are present and correctly formatted.
+| File | Purpose |
+|------|---------|
+| `{container_name}-explicit.txt` | Exact package lock file generated with `micromamba list --explicit`. This records the precise package URLs and package builds required to recreate the environment exactly. |
+| `{container_name}-history.yml` | Environment specification generated with `micromamba env export --from-history`. This contains only the packages that were explicitly requested during environment creation, allowing dependencies to be re-resolved. |
+| `{container_name}-environment.yml` | Full environment export generated with `micromamba env export`. This records every installed package, including all resolved dependencies, providing a complete description of the final environment. |
+| `{container_name}.sif.sha256` | SHA-256 checksum of the built `.sif` image, allowing verification that the container image has not changed or become corrupted. |
 
-Note: it will use the same name throughout so if want a different name for `.yaml`, `.def` or `.sif` perform steps manually. 
+These files are produced during the container build using:
+
+```bash
+# Save exact package lock for this environment
+micromamba list \
+    -n ${ENV_NAME} \
+    --explicit \
+    > /opt/${ENV_NAME}-explicit.txt
+
+# Save environment specification containing only explicitly requested packages
+micromamba env export \
+    -n ${ENV_NAME} \
+    --from-history \
+    > /opt/${ENV_NAME}-history.yml
+
+# Save complete environment including all resolved dependencies
+micromamba env export \
+    -n ${ENV_NAME} \
+    > /opt/${ENV_NAME}-environment.yml
+```
+
+Archive these files alongside the final `.sif` image (and ideally the corresponding `.def` file) to provide a complete provenance record and maximise the ability to reproduce, verify, or audit the container environment in the future.
 
 ---
 
@@ -477,12 +521,14 @@ Container startup should normally take well under one second.
 
 # Files Included
 
-This workflow uses four files:
+This workflow uses six files:
 
 ```
 sc_basic.def
 sc_basic.yaml
-apptainer_kernel_launcher.sh
+apptainer_kernel_launcher.
+build_container.sh
+extract_container_provenance.sh
 register_container_kernel.py
 ```
 
@@ -505,4 +551,5 @@ Example files for workflow:
 | [`sc_basic.yaml`](config/kernels/sc_basic.yaml) | Metadata file used for kernel registration |
 | [`apptainer_kernel_launcher.sh`](scripts/containers/apptainer_kernel_launcher.sh) | Wrapper script used by Jupyter to launch kernels inside Apptainer |
 | [`build_container.sh`](scripts/containers/build_container.sh) | Wrapper script to assist apptainer image construction |
+| [`extract_container_provenance.sh`](scripts/containers/extract_container_provenance.sh) | Wrapper script to extract environment details |
 | [`register_container_kernel.py`](scripts/containers/register_container_kernel.py) | Python utility to register container kernels |
